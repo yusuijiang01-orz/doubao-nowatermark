@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>豆包无水印下载</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      background: #0f0f1a;
+      color: #e8e8f0;
+      font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-size: 13px;
+      overflow: hidden;
+    }
+
+    /* ── 头部 ── */
+    .header {
+      background: linear-gradient(135deg, #6c63ff, #4e46e5);
+      padding: 16px 18px 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .header-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .header-text h1 {
+      font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2;
+    }
+    .header-text p {
+      font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 3px;
+    }
+
+    /* ── 通用卡片 ── */
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a45;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 10px; font-weight: 600; color: #6666aa;
+      text-transform: uppercase; letter-spacing: .6px;
+      margin-bottom: 9px;
+    }
+
+    .body { padding: 14px 14px 12px; }
+
+    /* ── 状态行 ── */
+    .status-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 3px 0; font-size: 12px; color: #9999bb;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+      background: #3a3a5c;
+    }
+    .status-dot.green  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.5); }
+    .status-dot.yellow { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,.4); }
+    .status-row .val { color: #c8c8e8; margin-left: auto; font-size: 11px; }
+
+    /* ── 统计数字 ── */
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+      margin-top: 2px;
+    }
+    .stat-item {
+      background: #12122a;
+      border: 1px solid #252545;
+      border-radius: 7px;
+      padding: 7px 6px;
+      text-align: center;
+    }
+    .stat-num { font-size: 18px; font-weight: 700; color: #a78bfa; line-height: 1; }
+    .stat-label { font-size: 10px; color: #666688; margin-top: 3px; }
+
+    /* ── 步骤 ── */
+    .step {
+      display: flex; gap: 8px; align-items: flex-start;
+      margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: #b0b0d0;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 17px; height: 17px; flex-shrink: 0; margin-top: 1px;
+      background: linear-gradient(135deg, #6c63ff, #4e46e5);
+      border-radius: 50%; font-size: 10px; font-weight: 700; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hl { color: #a78bfa; font-weight: 600; }
+
+    /* ── 技术说明 ── */
+    .tech-row {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 11px; color: #888899; line-height: 1.5;
+      padding: 3px 0;
+    }
+    .tech-badge {
+      flex-shrink: 0; padding: 1px 6px;
+      border-radius: 4px; font-size: 10px; font-weight: 600;
+      margin-top: 1px;
+    }
+    .badge-green  { background: rgba(74,222,128,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.25); }
+    .badge-yellow { background: rgba(251,191,36,.15);  color: #fbbf24; border: 1px solid rgba(251,191,36,.25); }
+
+    /* ── 按钮 ── */
+    .open-btn {
+      display: block; width: 100%;
+      padding: 9px;
+      background: linear-gradient(135deg, #6c63ff, #4e46e5);
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      text-align: center; transition: filter .15s; font-family: inherit;
+    }
+    .open-btn:hover { filter: brightness(1.12); }
+
+    /* ── 分割线 ── */
+    hr { border: none; border-top: 1px solid #1e1e35; margin: 2px 0 10px; }
+
+    /* ── 底部作者 ── */
+    .footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px 12px;
+      border-top: 1px solid #1e1e35;
+    }
+    .author { font-size: 11px; color: #555577; }
+    /* 新增：作者链接样式，匹配页面紫色调且颜色柔和 */
+    .author a {
+      color: #7c6fe0; 
+      font-weight: 600;
+      text-decoration: none; /* 去掉默认下划线 */
+      transition: color 0.2s; /* 颜色过渡更自然 */
+    }
+    .author a:hover {
+      color: #8d82e4; /* 悬浮时浅一点的紫色，不刺眼 */
+      text-decoration: underline; /* 悬浮显示下划线提示可点击 */
+      text-underline-offset: 2px; /* 下划线偏移更美观 */
+    }
+    .version-badge {
+      font-size: 10px; color: #555577;
+      background: #1a1a2e; border: 1px solid #252545;
+      padding: 2px 8px; border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 头部 -->
+  <div class="header">
+    <div class="header-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+        <line x1="2" y1="2" x2="22" y2="22" stroke-width="2" stroke="rgba(255,255,255,0.5)"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>豆包无水印下载</h1>
+      <p>Doubao Image Watermark Remover</p>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 状态卡片 -->
+    <div class="card">
+      <div class="card-title">运行状态</div>
+      <div class="status-row">
+        <div class="status-dot green"></div>
+        <span>扩展已启用</span>
+        <span class="val" id="status-text">正常运行</span>
+      </div>
+      <div class="status-row" style="margin-top:4px">
+        <div class="status-dot" id="dot-page"></div>
+        <span>当前页面</span>
+        <span class="val" id="page-text">检测中...</span>
+      </div>
+    </div>
+
+    <!-- 本次会话捕获统计 -->
+    <div class="card">
+      <div class="card-title">本次会话捕获</div>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num" id="cnt-ori">—</div>
+          <div class="stat-label">原图</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="cnt-dld">—</div>
+          <div class="stat-label">DLD</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="cnt-pre">—</div>
+          <div class="stat-label">PRE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 使用方法 -->
+    <div class="card">
+      <div class="card-title">使用方法</div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <span>打开豆包，点击任意 AI 生成图片进入预览界面</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <span>等待图片完全加载（预览图清晰可见后）</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <span>点击右下角紫色 <span class="hl">「下载无水印」</span> 按钮</span>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <span>稍等片刻，无水印 PNG 将自动保存到下载目录</span>
+      </div>
+    </div>
+
+    <!-- 技术原理 -->
+    <div class="card">
+      <div class="card-title">去水印原理</div>
+      <div class="tech-row">
+        <div class="tech-badge badge-green">方案 A</div>
+        <span>拦截 API 响应，直接获取服务端返回的无水印原图，零损耗一键下载</span>
+      </div>
+      <div class="tech-row" style="margin-top:5px">
+        <div class="tech-badge badge-yellow">方案 B</div>
+        <span>豆包提供两张水印位置互补的图片，通过 Canvas 精准拼合还原完整无水印图像</span>
+      </div>
+    </div>
+
+    <button class="open-btn" id="open-doubao">打开豆包</button>
+
+  </div>
+
+  <!-- 底部作者信息：添加了跳转链接 -->
+  <div class="footer">
+    <div class="author">作者 <a href="https://github.com/yusuijiang01-orz" target="_blank">@yusuijiang</a></div>
+    <div class="version-badge" id="ver-badge">v3.1.0</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

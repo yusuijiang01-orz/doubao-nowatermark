@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "豆包无水印下载",
+  "short_name": "豆包去水印",
+  "version": "3.1.0",
+  "description": "一键下载豆包 AI 生成的无水印图片。优先拦截 API 获取完整原图；若不可用，自动切换备用方案：将豆包提供的两张水印位置互补的图片通过 Canvas 精准拼合，还原出完整无水印图像。",
+  "author": "yusuijiang",
+  "homepage_url": "https://github.com/yusuijiang01-orz",
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "豆包无水印下载"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.doubao.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.doubao.com/*",
+    "https://*.byteimg.com/*",
+    "https://opt.doubao.com/*",
+    "https://mcs.doubao.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["https://www.doubao.com/*"]
+    }
+  ]
+}
