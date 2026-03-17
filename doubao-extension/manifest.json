@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "豆包无水印下载",
   "short_name": "豆包去水印",
-  "version": "3.1.0",
-  "description": "一键下载豆包 AI 生成的无水印图片。优先拦截 API 获取完整原图；若不可用，自动切换备用方案：将豆包提供的两张水印位置互补的图片通过 Canvas 精准拼合，还原出完整无水印图像。",
+  "version": "4.0.3",
+  "description": "一键下载豆包 AI 生成的无水印图片。支持批量下载、PNG/JPEG 格式选择、智能文件命名。优先拦截 API 获取原图，备用方案自动 Canvas 拼合去水印。",
   "author": "yusuijiang",
   "homepage_url": "https://github.com/yusuijiang01-orz",
   "icons": {
@@ -34,7 +34,8 @@
   "permissions": [
     "activeTab",
     "downloads",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "host_permissions": [
     "https://www.doubao.com/*",

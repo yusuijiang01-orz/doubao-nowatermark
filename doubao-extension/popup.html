@@ -31,14 +31,10 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .header-text h1 {
-      font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2;
-    }
-    .header-text p {
-      font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 3px;
-    }
+    .header-text h1 { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2; }
+    .header-text p  { font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 3px; }
 
-    /* ── 通用卡片 ── */
+    /* ── 卡片 ── */
     .card {
       background: #1a1a2e;
       border: 1px solid #2a2a45;
@@ -59,61 +55,55 @@
       display: flex; align-items: center; gap: 8px;
       padding: 3px 0; font-size: 12px; color: #9999bb;
     }
-    .status-dot {
-      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-      background: #3a3a5c;
-    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: #3a3a5c; }
     .status-dot.green  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.5); }
     .status-dot.yellow { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,.4); }
     .status-row .val { color: #c8c8e8; margin-left: auto; font-size: 11px; }
 
-    /* ── 统计数字 ── */
-    .stat-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
-      margin-top: 2px;
-    }
+    /* ── 捕获统计 ── */
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 2px; }
     .stat-item {
-      background: #12122a;
-      border: 1px solid #252545;
-      border-radius: 7px;
-      padding: 7px 6px;
-      text-align: center;
+      background: #12122a; border: 1px solid #252545;
+      border-radius: 7px; padding: 7px 6px; text-align: center;
     }
-    .stat-num { font-size: 18px; font-weight: 700; color: #a78bfa; line-height: 1; }
+    .stat-num   { font-size: 18px; font-weight: 700; color: #a78bfa; line-height: 1; }
     .stat-label { font-size: 10px; color: #666688; margin-top: 3px; }
 
-    /* ── 步骤 ── */
-    .step {
-      display: flex; gap: 8px; align-items: flex-start;
-      margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: #b0b0d0;
+    /* ── 格式设置 ── */
+    .fmt-row { display: flex; gap: 7px; margin-bottom: 10px; }
+    .fmt-btn {
+      flex: 1; padding: 7px 0; border-radius: 8px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      border: none; transition: filter .15s; font-family: inherit;
     }
-    .step:last-child { margin-bottom: 0; }
-    .step-num {
-      width: 17px; height: 17px; flex-shrink: 0; margin-top: 1px;
-      background: linear-gradient(135deg, #6c63ff, #4e46e5);
-      border-radius: 50%; font-size: 10px; font-weight: 700; color: #fff;
-      display: flex; align-items: center; justify-content: center;
+    .fmt-btn.active {
+      background: linear-gradient(135deg, #6c63ff, #4e46e5); color: #fff;
     }
-    .hl { color: #a78bfa; font-weight: 600; }
+    .fmt-btn.inactive {
+      background: #12122a; color: #888899; border: 1px solid #2a2a45;
+    }
+    .qual-row { margin-top: 4px; }
+    .qual-row label { font-size: 11px; color: #888899; display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .qual-row input[type=range] { width: 100%; accent-color: #6c63ff; cursor: pointer; }
+    .fmt-hint { font-size: 10px; color: #555577; line-height: 1.5; margin-top: 8px; }
 
-    /* ── 技术说明 ── */
-    .tech-row {
-      display: flex; align-items: flex-start; gap: 8px;
-      font-size: 11px; color: #888899; line-height: 1.5;
-      padding: 3px 0;
+    /* ── 操作按钮组 ── */
+    .btn-group { display: flex; gap: 8px; }
+    .action-btn {
+      flex: 1; padding: 9px 0;
+      border: none; border-radius: 8px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      transition: filter .15s; font-family: inherit;
     }
-    .tech-badge {
-      flex-shrink: 0; padding: 1px 6px;
-      border-radius: 4px; font-size: 10px; font-weight: 600;
-      margin-top: 1px;
-    }
-    .badge-green  { background: rgba(74,222,128,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.25); }
-    .badge-yellow { background: rgba(251,191,36,.15);  color: #fbbf24; border: 1px solid rgba(251,191,36,.25); }
+    .btn-primary { background: linear-gradient(135deg, #6c63ff, #4e46e5); color: #fff; }
+    .btn-blue    { background: linear-gradient(135deg, #0ea5e9, #0284c7);  color: #fff; }
+    .action-btn:hover  { filter: brightness(1.12); }
+    .action-btn:active { filter: brightness(.95); }
 
-    /* ── 按钮 ── */
+    /* ── 打开豆包 ── */
     .open-btn {
-      display: block; width: 100%;
-      padding: 9px;
+      display: block; width: 100%; padding: 9px;
       background: linear-gradient(135deg, #6c63ff, #4e46e5);
       color: #fff; border: none; border-radius: 8px;
       font-size: 13px; font-weight: 600; cursor: pointer;
@@ -121,28 +111,16 @@
     }
     .open-btn:hover { filter: brightness(1.12); }
 
-    /* ── 分割线 ── */
     hr { border: none; border-top: 1px solid #1e1e35; margin: 2px 0 10px; }
 
-    /* ── 底部作者 ── */
+    /* ── 底部 ── */
     .footer {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px 12px;
-      border-top: 1px solid #1e1e35;
+      padding: 10px 14px 12px; border-top: 1px solid #1e1e35;
     }
     .author { font-size: 11px; color: #555577; }
-    /* 新增：作者链接样式，匹配页面紫色调且颜色柔和 */
-    .author a {
-      color: #7c6fe0; 
-      font-weight: 600;
-      text-decoration: none; /* 去掉默认下划线 */
-      transition: color 0.2s; /* 颜色过渡更自然 */
-    }
-    .author a:hover {
-      color: #8d82e4; /* 悬浮时浅一点的紫色，不刺眼 */
-      text-decoration: underline; /* 悬浮显示下划线提示可点击 */
-      text-underline-offset: 2px; /* 下划线偏移更美观 */
-    }
+    .author a { color: #7c6fe0; font-weight: 600; text-decoration: none; transition: color .2s; }
+    .author a:hover { color: #8d82e4; text-decoration: underline; text-underline-offset: 2px; }
     .version-badge {
       font-size: 10px; color: #555577;
       background: #1a1a2e; border: 1px solid #252545;
@@ -158,8 +136,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff"
         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
+        <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
         <line x1="2" y1="2" x2="22" y2="22" stroke-width="2" stroke="rgba(255,255,255,0.5)"/>
       </svg>
     </div>
@@ -171,13 +148,13 @@
 
   <div class="body">
 
-    <!-- 状态卡片 -->
+    <!-- 运行状态 -->
     <div class="card">
       <div class="card-title">运行状态</div>
       <div class="status-row">
         <div class="status-dot green"></div>
         <span>扩展已启用</span>
-        <span class="val" id="status-text">正常运行</span>
+        <span class="val">正常运行</span>
       </div>
       <div class="status-row" style="margin-top:4px">
         <div class="status-dot" id="dot-page"></div>
@@ -190,52 +167,47 @@
     <div class="card">
       <div class="card-title">本次会话捕获</div>
       <div class="stat-grid">
-        <div class="stat-item">
-          <div class="stat-num" id="cnt-ori">—</div>
-          <div class="stat-label">原图</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" id="cnt-dld">—</div>
-          <div class="stat-label">DLD</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" id="cnt-pre">—</div>
-          <div class="stat-label">PRE</div>
-        </div>
+        <div class="stat-item"><div class="stat-num" id="cnt-ori">—</div><div class="stat-label">原图</div></div>
+        <div class="stat-item"><div class="stat-num" id="cnt-dld">—</div><div class="stat-label">DLD</div></div>
+        <div class="stat-item"><div class="stat-num" id="cnt-pre">—</div><div class="stat-label">PRE</div></div>
       </div>
     </div>
 
-    <!-- 使用方法 -->
+    <!-- 下载格式设置 -->
     <div class="card">
-      <div class="card-title">使用方法</div>
-      <div class="step">
-        <div class="step-num">1</div>
-        <span>打开豆包，点击任意 AI 生成图片进入预览界面</span>
+      <div class="card-title">下载格式</div>
+      <div class="fmt-row">
+        <button class="fmt-btn" id="fmt-png">PNG 无损</button>
+        <button class="fmt-btn" id="fmt-jpg">JPEG 有损</button>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <span>等待图片完全加载（预览图清晰可见后）</span>
+      <div class="qual-row" id="qual-row" style="display:none">
+        <label>
+          <span>JPEG 质量</span>
+          <span id="qual-val">92%</span>
+        </label>
+        <input id="qual-slider" type="range" min="60" max="100" value="92">
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <span>点击右下角紫色 <span class="hl">「下载无水印」</span> 按钮</span>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <span>稍等片刻，无水印 PNG 将自动保存到下载目录</span>
+      <div class="fmt-hint">
+        PNG：无损，文件较大 &nbsp;|&nbsp; JPEG：体积小，质量可调
       </div>
     </div>
 
-    <!-- 技术原理 -->
-    <div class="card">
-      <div class="card-title">去水印原理</div>
-      <div class="tech-row">
-        <div class="tech-badge badge-green">方案 A</div>
-        <span>拦截 API 响应，直接获取服务端返回的无水印原图，零损耗一键下载</span>
-      </div>
-      <div class="tech-row" style="margin-top:5px">
-        <div class="tech-badge badge-yellow">方案 B</div>
-        <span>豆包提供两张水印位置互补的图片，通过 Canvas 精准拼合还原完整无水印图像</span>
+    <!-- 操作按钮 -->
+    <div class="card" id="action-card" style="display:none">
+      <div class="card-title">快捷操作</div>
+      <div class="btn-group">
+        <button class="action-btn btn-primary" id="btn-single">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          下载当前图
+        </button>
+        <button class="action-btn btn-blue" id="btn-batch">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          批量下载
+        </button>
       </div>
     </div>
 
@@ -243,10 +215,10 @@
 
   </div>
 
-  <!-- 底部作者信息：添加了跳转链接 -->
+  <!-- 底部 -->
   <div class="footer">
     <div class="author">作者 <a href="https://github.com/yusuijiang01-orz" target="_blank">@yusuijiang</a></div>
-    <div class="version-badge" id="ver-badge">v3.1.0</div>
+    <div class="version-badge" id="ver-badge">v4.0.0</div>
   </div>
 
   <script src="popup.js"></script>
